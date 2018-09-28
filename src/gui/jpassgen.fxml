@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="6.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.JPassGenController">
+   <children>
+      <Label text="Length" />
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="lengthCheckBox" fx:id="lengthCheckBox" mnemonicParsing="false" />
+            <Slider id="lengthSlider" fx:id="lengthSlider" max="128.0" prefWidth="256.0" />
+            <Spinner id="lengthSpinner" fx:id="lengthSpinner" editable="true" prefWidth="72.0" />
+         </children>
+      </HBox>
+      <Label text="Lowercase characters" />
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="lowerCheckBox" mnemonicParsing="false" />
+            <Spinner id="lowerSpinner" fx:id="lowerSpinner" editable="true" prefWidth="68.0" />
+            <TextField id="lowerTextField" fx:id="lowerTextField" editable="false" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+      <Label text="Uppercase characters" />
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="upperCheckBox" mnemonicParsing="false" />
+            <Spinner id="upperSpinner" fx:id="upperSpinner" editable="true" prefWidth="68.0" />
+            <TextField id="upperTextField" fx:id="upperTextField" editable="false" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+      <Label text="Digit characters" />
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="digitCheckBox" mnemonicParsing="false" />
+            <Spinner id="digitSpinner" fx:id="digitSpinner" editable="true" prefWidth="68.0" />
+            <TextField id="digitTextField" fx:id="digitTextField" editable="false" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+      <Label text="Punctuation characters" />
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="punctuationCheckBox" mnemonicParsing="false" />
+            <Spinner id="punctuationSpinner" fx:id="punctuationSpinner" editable="true" prefWidth="68.0" />
+            <TextField id="punctuationTextField" fx:id="punctuationTextField" editable="false" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+      <Label text="Generated Password" />
+      <VBox alignment="CENTER">
+         <children>
+            <Button id="generateButton" fx:id="generateButton" mnemonicParsing="false" onAction="#generate" text="Generate">
+               <padding>
+                  <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <TextField id="passwordField" fx:id="passwordField" editable="false" alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+   </children>
+   <padding>
+      <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+   </padding>
+</VBox>

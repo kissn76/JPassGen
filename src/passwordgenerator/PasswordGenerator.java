@@ -1,3 +1,4 @@
+package passwordgenerator;
 import java.util.Random;
 import stringtools.StringTools;
 

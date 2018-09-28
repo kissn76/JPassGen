@@ -1,3 +1,6 @@
+import passwordgenerator.PasswordGenerator;
+import passwordgenerator.PasswordLengthException;
+
 public class JPassGen {
 
     public static void main(String[] args) {
