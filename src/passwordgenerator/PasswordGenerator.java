@@ -1,5 +1,7 @@
 package passwordgenerator;
+
 import java.util.Random;
+
 import stringtools.StringTools;
 
 /**
@@ -9,10 +11,18 @@ import stringtools.StringTools;
  */
 public class PasswordGenerator {
 
-    private final String LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final String DIGITS = "0123456789";
-    private final String PUNCTUATION = "!@#$%&*()_+-=[]|,./?><";
+    private final String LOWERALL = "abcdefghijklmnopqrstuvwxyz";
+    private final String UPPERALL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final String DIGITSALL = "0123456789";
+    private final String PUNCTUATIONALL = "!@#$%&*()_+-=[]|,./?><";
+    private final String LOWERSAFE = "abcdefghijkmnopqrstuvwxyz";
+    private final String UPPERSAFE = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+    private final String DIGITSSAFE = "23456789";
+    private final String PUNCTUATIONSAFE = "!@#$%&*()_+-=[],./?><";
+    private String LOWER = this.LOWERALL;
+    private String UPPER = this.UPPERALL;
+    private String DIGITS = this.DIGITSALL;
+    private String PUNCTUATION = this.PUNCTUATIONALL;
     private int defaultLength = 32;
     private boolean allowedLower;
     private boolean allowedUpper;
@@ -67,6 +77,70 @@ public class PasswordGenerator {
         this.minNumberPunctuation = this.allowedPunctuation ? numberOfPunctuation : 0;
     }
 
+    public String getLOWERALL() {
+        return this.LOWERALL;
+    }
+
+    public String getUPPERALL() {
+        return this.UPPERALL;
+    }
+
+    public String getDIGITSALL() {
+        return this.DIGITSALL;
+    }
+
+    public String getPUNCTUATIONALL() {
+        return this.PUNCTUATIONALL;
+    }
+
+    public String getLOWERSAFE() {
+        return this.LOWERSAFE;
+    }
+
+    public String getUPPERSAFE() {
+        return this.UPPERSAFE;
+    }
+
+    public String getDIGITSSAFE() {
+        return this.DIGITSSAFE;
+    }
+
+    public String getPUNCTUATIONSAFE() {
+        return this.PUNCTUATIONSAFE;
+    }
+
+    public void setLOWER(String lOWER) {
+        this.LOWER = lOWER;
+    }
+
+    public void setUPPER(String uPPER) {
+        this.UPPER = uPPER;
+    }
+
+    public void setDIGITS(String dIGITS) {
+        this.DIGITS = dIGITS;
+    }
+
+    public void setPUNCTUATION(String pUNCTUATION) {
+        this.PUNCTUATION = pUNCTUATION;
+    }
+
+    public String getLOWER() {
+        return this.LOWER;
+    }
+
+    public String getUPPER() {
+        return this.UPPER;
+    }
+
+    public String getDIGITS() {
+        return this.DIGITS;
+    }
+
+    public String getPUNCTUATION() {
+        return this.PUNCTUATION;
+    }
+
     /**
      * Enable lower case characters in password.
      */
@@ -79,6 +153,10 @@ public class PasswordGenerator {
      */
     public void disableLower() {
         this.allowedLower = false;
+    }
+
+    public boolean isEnabledLower() {
+        return this.allowedLower;
     }
 
     /**
@@ -95,6 +173,10 @@ public class PasswordGenerator {
         this.allowedUpper = false;
     }
 
+    public boolean isEnabledUpper() {
+        return this.allowedUpper;
+    }
+
     /**
      * Enable digit characters in password.
      */
@@ -109,6 +191,10 @@ public class PasswordGenerator {
         this.allowedDigit = false;
     }
 
+    public boolean isEnabledDigit() {
+        return this.allowedDigit;
+    }
+
     /**
      * Enable punctuation characters in password.
      */
@@ -121,6 +207,10 @@ public class PasswordGenerator {
      */
     public void disablePunctuation() {
         this.allowedPunctuation = false;
+    }
+
+    public boolean isEnabledPunctuation() {
+        return this.allowedPunctuation;
     }
 
     /**
@@ -190,7 +280,7 @@ public class PasswordGenerator {
     }
 
     public int getDefaultLength() {
-        return defaultLength;
+        return this.defaultLength;
     }
 
     /**
@@ -213,19 +303,23 @@ public class PasswordGenerator {
      * @throws PasswordLengthException
      */
     public String generate(int length) throws PasswordLengthException {
-        int minLength = getMinLength();
-        if (minLength > length) {
-            throw new PasswordLengthException(minLength, length);
-        }
-        // Set minimum characters
-        String password = getAllowedRandomString(this.minNumberLower, this.minNumberUpper, this.minNumberDigit, this.minNumberPunctuation);
+        if (!this.allowedLower && !this.allowedUpper && !this.allowedDigit && !this.allowedPunctuation) {
+            return "";
+        } else {
+            int minLength = getMinLength();
+            if (minLength > length) {
+                throw new PasswordLengthException(minLength, length);
+            }
+            // Set minimum characters
+            String password = getAllowedRandomString(this.minNumberLower, this.minNumberUpper, this.minNumberDigit, this.minNumberPunctuation);
 
-        int x = length - password.length(); // Ennyi karakter kell még a beállított hosszhoz
-        for (int i = 0; i < x; i++) {
-            password += getAllowedRandomChar();
-        }
+            int x = length - password.length(); // Ennyi karakter kell még a beállított hosszhoz
+            for (int i = 0; i < x; i++) {
+                password += getAllowedRandomChar();
+            }
 
-        return StringTools.shuffle(password);   // Shuffle the string
+            return StringTools.shuffle(password);   // Shuffle the string
+        }
     }
 
     /*

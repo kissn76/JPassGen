@@ -16,9 +16,10 @@ public class JPassGenGui extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("jpassgen.fxml"));
 
-        Scene scene = new Scene(root, 400, 410);
+        Scene scene = new Scene(root);
 
         stage.setTitle("JPassGen - Java Password Generator");
+        stage.setWidth(400);
         stage.setScene(scene);
         stage.show();
     }

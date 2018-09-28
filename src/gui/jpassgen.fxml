@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
@@ -17,42 +16,50 @@
       <Label text="Length" />
       <HBox alignment="CENTER_LEFT" spacing="6.0">
          <children>
-            <CheckBox id="lengthCheckBox" fx:id="lengthCheckBox" mnemonicParsing="false" />
-            <Slider id="lengthSlider" fx:id="lengthSlider" max="128.0" prefWidth="256.0" />
-            <Spinner id="lengthSpinner" fx:id="lengthSpinner" editable="true" prefWidth="72.0" />
+            <Spinner id="lengthSpinner" fx:id="lengthSpinner" editable="true" prefWidth="68.0" />
+            <Slider id="lengthSlider" fx:id="lengthSlider" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <Label text="Lowercase characters" />
       <HBox alignment="CENTER_LEFT" spacing="6.0">
          <children>
-            <CheckBox id="lowerCheckBox" mnemonicParsing="false" />
+            <CheckBox id="lowerCheckBox" fx:id="lowerCheckBox" mnemonicParsing="false" />
             <Spinner id="lowerSpinner" fx:id="lowerSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="lowerTextField" fx:id="lowerTextField" editable="false" HBox.hgrow="SOMETIMES" />
+            <TextField id="lowerTextField" fx:id="lowerTextField" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <Label text="Uppercase characters" />
       <HBox alignment="CENTER_LEFT" spacing="6.0">
          <children>
-            <CheckBox id="upperCheckBox" mnemonicParsing="false" />
+            <CheckBox id="upperCheckBox" fx:id="upperCheckBox" mnemonicParsing="false" />
             <Spinner id="upperSpinner" fx:id="upperSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="upperTextField" fx:id="upperTextField" editable="false" HBox.hgrow="SOMETIMES" />
+            <TextField id="upperTextField" fx:id="upperTextField" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <Label text="Digit characters" />
       <HBox alignment="CENTER_LEFT" spacing="6.0">
          <children>
-            <CheckBox id="digitCheckBox" mnemonicParsing="false" />
+            <CheckBox id="digitCheckBox" fx:id="digitCheckBox" mnemonicParsing="false" />
             <Spinner id="digitSpinner" fx:id="digitSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="digitTextField" fx:id="digitTextField" editable="false" HBox.hgrow="SOMETIMES" />
+            <TextField id="digitTextField" fx:id="digitTextField" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <Label text="Punctuation characters" />
       <HBox alignment="CENTER_LEFT" spacing="6.0">
          <children>
-            <CheckBox id="punctuationCheckBox" mnemonicParsing="false" />
+            <CheckBox id="punctuationCheckBox" fx:id="punctuationCheckBox" mnemonicParsing="false" />
             <Spinner id="punctuationSpinner" fx:id="punctuationSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="punctuationTextField" fx:id="punctuationTextField" editable="false" HBox.hgrow="SOMETIMES" />
+            <TextField id="punctuationTextField" fx:id="punctuationTextField" HBox.hgrow="ALWAYS" />
          </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" spacing="6.0">
+         <children>
+            <Button id="allcharactersButton" fx:id="allcharactersButton" mnemonicParsing="false" onAction="#setAllCharacters" text="Reset" />
+            <Button id="safecharsButton" fx:id="safecharsButton" mnemonicParsing="false" onAction="#setSafeCharacters" text="Safe" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </HBox>
       <Label text="Generated Password" />
       <VBox alignment="CENTER">
@@ -64,11 +71,16 @@
             </Button>
          </children>
       </VBox>
-      <TextField id="passwordField" fx:id="passwordField" editable="false" alignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
+      <HBox alignment="CENTER_LEFT" spacing="6.0">
+         <children>
+            <CheckBox id="unhidPwdField" fx:id="unhidPwdField" mnemonicParsing="false" />
+            <TextField id="passwordField" fx:id="passwordField" editable="false" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
