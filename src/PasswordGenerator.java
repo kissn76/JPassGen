@@ -188,6 +188,10 @@ public class PasswordGenerator {
         this.minNumberPunctuation = minNumberPunctuation;
     }
 
+    public int getDefaultLength() {
+        return defaultLength;
+    }
+
     /**
      * Generate a random password with the adjusted parameters. The length of password will be 32
      * characters.
