@@ -7,14 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class JPassGenGui extends Application {
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("jpassgen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("jpassgenpanel.fxml"));
 
         Scene scene = new Scene(root);
 

@@ -1,3 +1,5 @@
+import gui.JPassGenGui;
+import javafx.application.Application;
 import passwordgenerator.PasswordGenerator;
 import passwordgenerator.PasswordLengthException;
 
@@ -10,7 +12,9 @@ public class JPassGen {
         int passLength = passwordGenerator.getDefaultLength();
         try {
             if (args.length > 0) {
-                if (args[0].equals("-h") || args[0].equals("--help")) {
+                if (args[0].equals("gui")) {
+                    Application.launch(JPassGenGui.class, args);
+                } else if (args[0].equals("-h") || args[0].equals("--help")) {
                     output += "\njava JPassGen [length] [lower] [upper] [digit] [punctuation]" + "\n\n";
                     output += "length       - Length of the password." + "\n";
                     output += "                0 - default length" + "\n";

@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import passwordgenerator.PasswordGenerator;
 import passwordgenerator.PasswordLengthException;
 
-public class JPassGenController {
+public class JPassGenPanelController {
     private PasswordGenerator passwordGenerator = new PasswordGenerator();
     private String password;
     private final char hiddenPwdChar = '●';
@@ -131,7 +131,7 @@ public class JPassGenController {
         this.lengthSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                JPassGenController.this.lengthSlider.setValue(newValue);
+                JPassGenPanelController.this.lengthSlider.setValue(newValue);
             }
         });
 
@@ -148,9 +148,9 @@ public class JPassGenController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (newValue.intValue() < 1) {
                     newValue = 1;
-                    JPassGenController.this.lengthSlider.setValue(newValue.intValue());
+                    JPassGenPanelController.this.lengthSlider.setValue(newValue.intValue());
                 }
-                JPassGenController.this.lengthSpinner.getEditor().setText(String.valueOf(newValue.intValue()));
+                JPassGenPanelController.this.lengthSpinner.getEditor().setText(String.valueOf(newValue.intValue()));
             }
         });
 
@@ -189,9 +189,9 @@ public class JPassGenController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    JPassGenController.this.passwordField.setText(JPassGenController.this.password);
+                    JPassGenPanelController.this.passwordField.setText(JPassGenPanelController.this.password);
                 } else {
-                    JPassGenController.this.passwordField.setText(JPassGenController.this.passwordHider);
+                    JPassGenPanelController.this.passwordField.setText(JPassGenPanelController.this.passwordHider);
                 }
             }
         });
