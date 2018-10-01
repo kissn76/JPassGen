@@ -15,7 +15,9 @@ public class JPassGen {
                 if (args[0].equals("gui")) {
                     Application.launch(JPassGenGui.class, args);
                 } else if (args[0].equals("-h") || args[0].equals("--help")) {
-                    output += "\njava JPassGen [length] [lower] [upper] [digit] [punctuation]" + "\n\n";
+                    output += "\njava JPassGen gui" + "\n";
+                    output += "              Start graphical frontend." + "\n\n";
+                    output += "java JPassGen [length] [lower] [upper] [digit] [punctuation]" + "\n\n";
                     output += "length       - Length of the password." + "\n";
                     output += "                0 - default length" + "\n";
                     output += "lower        - Minimum number of lower case characters in password." + "\n";
