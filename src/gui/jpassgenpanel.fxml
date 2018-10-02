@@ -3,64 +3,100 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox spacing="6.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.JPassGenPanelController">
    <children>
-      <Label text="Length" />
-      <HBox alignment="CENTER_LEFT" spacing="6.0">
-         <children>
-            <Spinner id="lengthSpinner" fx:id="lengthSpinner" editable="true" prefWidth="68.0" />
-            <Slider id="lengthSlider" fx:id="lengthSlider" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <Label text="Lowercase characters" />
-      <HBox alignment="CENTER_LEFT" spacing="6.0">
-         <children>
-            <CheckBox id="lowerCheckBox" fx:id="lowerCheckBox" mnemonicParsing="false" />
-            <Spinner id="lowerSpinner" fx:id="lowerSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="lowerTextField" fx:id="lowerTextField" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <Label text="Uppercase characters" />
-      <HBox alignment="CENTER_LEFT" spacing="6.0">
-         <children>
-            <CheckBox id="upperCheckBox" fx:id="upperCheckBox" mnemonicParsing="false" />
-            <Spinner id="upperSpinner" fx:id="upperSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="upperTextField" fx:id="upperTextField" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <Label text="Digit characters" />
-      <HBox alignment="CENTER_LEFT" spacing="6.0">
-         <children>
-            <CheckBox id="digitCheckBox" fx:id="digitCheckBox" mnemonicParsing="false" />
-            <Spinner id="digitSpinner" fx:id="digitSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="digitTextField" fx:id="digitTextField" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <Label text="Punctuation characters" />
-      <HBox alignment="CENTER_LEFT" spacing="6.0">
-         <children>
-            <CheckBox id="punctuationCheckBox" fx:id="punctuationCheckBox" mnemonicParsing="false" />
-            <Spinner id="punctuationSpinner" fx:id="punctuationSpinner" editable="true" prefWidth="68.0" />
-            <TextField id="punctuationTextField" fx:id="punctuationTextField" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <HBox alignment="TOP_RIGHT" spacing="6.0">
-         <children>
-            <Button id="allcharactersButton" fx:id="allcharactersButton" mnemonicParsing="false" onAction="#setAllCharacters" text="Reset" />
-            <Button id="safecharsButton" fx:id="safecharsButton" mnemonicParsing="false" onAction="#setSafeCharacters" text="Safe" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </HBox>
+      <TitledPane text="Password profiles">
+         <content>
+            <VBox spacing="6.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <ComboBox editable="true" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" text="-" />
+                        <Button mnemonicParsing="false" text="+" />
+                     </children>
+                  </HBox>
+                  <Label text="Length" />
+                  <HBox alignment="CENTER_LEFT" spacing="6.0">
+                     <children>
+                        <Spinner id="lengthSpinner" fx:id="lengthSpinner" editable="true" prefWidth="68.0" />
+                        <Slider id="lengthSlider" fx:id="lengthSlider" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <TitledPane text="Character profiles">
+                     <content>
+                        <VBox spacing="6.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="3.0">
+                                 <children>
+                                    <ComboBox editable="true" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" text="-" />
+                                    <Button mnemonicParsing="false" text="+" />
+                                 </children>
+                              </HBox>
+                              <VBox spacing="6.0">
+                                 <children>
+                                    <Label text="Lowercase characters" />
+                                    <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                       <children>
+                                          <CheckBox id="lowerCheckBox" fx:id="lowerCheckBox" mnemonicParsing="false" />
+                                          <Spinner id="lowerSpinner" fx:id="lowerSpinner" editable="true" prefWidth="68.0" />
+                                          <TextField id="lowerTextField" fx:id="lowerTextField" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Uppercase characters" />
+                                    <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                       <children>
+                                          <CheckBox id="upperCheckBox" fx:id="upperCheckBox" mnemonicParsing="false" />
+                                          <Spinner id="upperSpinner" fx:id="upperSpinner" editable="true" prefWidth="68.0" />
+                                          <TextField id="upperTextField" fx:id="upperTextField" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Digit characters" />
+                                    <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                       <children>
+                                          <CheckBox id="digitCheckBox" fx:id="digitCheckBox" mnemonicParsing="false" />
+                                          <Spinner id="digitSpinner" fx:id="digitSpinner" editable="true" prefWidth="68.0" />
+                                          <TextField id="digitTextField" fx:id="digitTextField" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Punctuation characters" />
+                                    <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                       <children>
+                                          <CheckBox id="punctuationCheckBox" fx:id="punctuationCheckBox" mnemonicParsing="false" />
+                                          <Spinner id="punctuationSpinner" fx:id="punctuationSpinner" editable="true" prefWidth="68.0" />
+                                          <TextField id="punctuationTextField" fx:id="punctuationTextField" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_RIGHT" spacing="6.0">
+                                       <children>
+                                          <Button id="allcharactersButton" fx:id="allcharactersButton" mnemonicParsing="false" onAction="#setAllCharacters" text="Reset" />
+                                          <Button id="safecharsButton" fx:id="safecharsButton" mnemonicParsing="false" onAction="#setSafeCharacters" text="Safe" />
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
       <Label text="Generated Password" />
       <VBox alignment="CENTER">
          <children>
