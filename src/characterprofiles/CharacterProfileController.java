@@ -18,6 +18,9 @@ public class CharacterProfileController {
         return characterProfiles;
     }
 
+    public void save() {
+    }
+
     private void loadAll(String folderPath) throws IOException {
         File folder = new File(folderPath);
         File[] listOfFiles = folder.listFiles();
