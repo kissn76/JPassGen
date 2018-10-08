@@ -10,30 +10,30 @@ import java.util.Properties;
 
 public class CharacterProfileController {
 
-    public CharacterProfile getCharacterProfile(String filePath) throws IOException {
+    public CharacterProfile getCharacterProfile(File filePath) throws IOException {
         return load(filePath);
     }
 
-    public Map<String, CharacterProfile> getCharacterProfiles(String folderPath) throws IOException {
+    public Map<String, CharacterProfile> getCharacterProfiles(File folderPath) throws IOException {
         HashMap<String, CharacterProfile> characterProfiles = new HashMap<>();
-        File folder = new File(folderPath);
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = folderPath.listFiles();
 
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                characterProfiles.put(file.getName(), getCharacterProfile(file.getAbsolutePath()));
+                characterProfiles.put(file.getName(), getCharacterProfile(file));
             }
         }
         return characterProfiles;
     }
 
-    public void save(CharacterProfile characterProfile, String characterProfilesFolder) throws IOException {
+    public void saveAsNew(CharacterProfile characterProfile, File folderPath) throws IOException {
+        characterProfile.generateFilePath(folderPath);
+        save(characterProfile);
+    }
+
+    public void save(CharacterProfile characterProfile) throws IOException {
         Properties prop = new Properties();
 
-        if (characterProfile.getFilename() == null) {
-            characterProfile.setFilename();
-        }
-        prop.setProperty("filename", characterProfile.getFilename());
         if (characterProfile.getName() != null) {
             prop.setProperty("name", characterProfile.getName());
         }
@@ -50,25 +50,24 @@ public class CharacterProfileController {
             prop.setProperty("punctuation", characterProfile.getPunctuations());
         }
 
-        FileOutputStream output = new FileOutputStream(characterProfilesFolder + characterProfile.getFilename());
+        FileOutputStream output = new FileOutputStream(characterProfile.getFilePath());
         prop.store(output, null);
         if (output != null) {
             output.close();
         }
     }
 
-    private CharacterProfile load(String filePath) throws IOException {
+    private CharacterProfile load(File filePath) throws IOException {
         Properties prop = new Properties();
         FileInputStream input = new FileInputStream(filePath);
         prop.load(input);
-        String filename = prop.getProperty("filename");
         String name = prop.getProperty("name");
         String lower = prop.getProperty("lower");
         String upper = prop.getProperty("upper");
         String digits = prop.getProperty("digits");
         String punctuation = prop.getProperty("punctuation");
         CharacterProfile characterProfile = new CharacterProfile();
-        characterProfile.setFilename(filename);
+        characterProfile.setFilePath(filePath);
         characterProfile.setName(name);
         characterProfile.setLowers(lower);
         characterProfile.setUppers(upper);
@@ -77,9 +76,8 @@ public class CharacterProfileController {
         return characterProfile;
     }
 
-    public void delete(CharacterProfile characterProfile, String characterProfilesFolder) {
-        File file = new File(characterProfilesFolder + characterProfile.getFilename());
-        file.delete();
+    public void delete(CharacterProfile characterProfile) {
+        characterProfile.getFilePath().delete();
     }
 
 }

@@ -1,0 +1,6 @@
+#Mon Oct 08 21:45:43 CEST 2018
+lower=a\u00E1bcde\u00E9fghijklmnopqrstuvwxyz
+name=All hun
+upper=A\u00C1BCDE\u00C9FGHIJKLMNOPQRSTUVWXYZ
+digits=0123456789
+punctuation=\!@\#$%&*()_+-\=[]|,./?><

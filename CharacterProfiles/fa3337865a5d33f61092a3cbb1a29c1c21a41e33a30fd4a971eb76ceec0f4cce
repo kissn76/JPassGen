@@ -1,0 +1,6 @@
+#Mon Oct 08 23:07:17 CEST 2018
+lower=abcdefghijkmnopqrstuvwxyz
+name=Safe web
+upper=ABCDEFGHJKLMNPQRSTUVWXYZ
+digits=23456789
+punctuation=\!@\#$%&*()_+-\=[],./?><

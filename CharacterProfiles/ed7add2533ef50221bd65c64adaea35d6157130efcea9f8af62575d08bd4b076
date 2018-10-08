@@ -1,0 +1,6 @@
+#Mon Oct 08 21:44:55 CEST 2018
+lower=abcdefghijklmnopqrstuvwxyz
+name=All eng
+upper=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+digits=0123456789
+punctuation=\!@\#$%&*()_+-\=[]|,./?><
