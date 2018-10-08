@@ -2,33 +2,42 @@ package characterprofiles;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class CharacterProfileController {
+    private String folderPath = "./";
 
-    private ArrayList<CharacterProfile> characterProfiles = new ArrayList<>();
-
-    public CharacterProfileController() throws IOException {
-        loadAll("characterprofiles");
+    public CharacterProfile getCharacterProfile(String filePath) throws IOException {
+        return load(filePath);
     }
 
-    public ArrayList<CharacterProfile> getCharacterProfiles() {
-        return characterProfiles;
-    }
-
-    public void save() {
-    }
-
-    private void loadAll(String folderPath) throws IOException {
-        File folder = new File(folderPath);
+    public Map<String, CharacterProfile> getCharacterProfiles() throws IOException {
+        HashMap<String, CharacterProfile> characterProfiles = new HashMap<>();
+        File folder = new File(this.folderPath);
         File[] listOfFiles = folder.listFiles();
 
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                characterProfiles.add(load(file.getAbsolutePath()));
+                characterProfiles.put(file.getName(), load(file.getAbsolutePath()));
             }
+        }
+        return characterProfiles;
+    }
+
+    public void save(CharacterProfile characterProfile, String filePath) throws IOException {
+        Properties prop = new Properties();
+        FileOutputStream output = new FileOutputStream(filePath);
+        prop.setProperty("lower", characterProfile.getLOWER());
+        prop.setProperty("upper", characterProfile.getUPPER());
+        prop.setProperty("digits", characterProfile.getDIGITS());
+        prop.setProperty("punctuation", characterProfile.getPUNCTUATION());
+        prop.store(output, null);
+        if (output != null) {
+            output.close();
         }
     }
 
