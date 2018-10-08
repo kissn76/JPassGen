@@ -98,6 +98,9 @@ public class JPassGenPanelController {
 
     @FXML
     private void deleteCharacterProfile() {
+        CharacterProfileController characterProfileController = new CharacterProfileController();
+        characterProfileController.delete(this.characterProfile, this.characterProfilesFolder);
+        setCharacterprofileBoxItems();
     }
 
     @FXML
@@ -111,7 +114,8 @@ public class JPassGenPanelController {
             this.characterProfile.setPunctuations(this.punctuationTextField.getText());
             CharacterProfileController characterProfileController = new CharacterProfileController();
             try {
-                characterProfileController.save(this.characterProfile, this.characterProfilesFolder + name.toLowerCase().trim().replaceAll(" ", ""));
+                characterProfileController.save(this.characterProfile, this.characterProfilesFolder);
+                setCharacterprofileBoxItems();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,6 +124,22 @@ public class JPassGenPanelController {
 
     @FXML
     private void saveAsNewCharacterProfile() {
+        String name = this.characterprofileBox.getEditor().getText();
+        if (!name.isEmpty()) {
+            this.characterProfile.setFilename();
+            this.characterProfile.setName(name);
+            this.characterProfile.setLowers(this.lowerTextField.getText());
+            this.characterProfile.setUppers(this.upperTextField.getText());
+            this.characterProfile.setDigits(this.digitTextField.getText());
+            this.characterProfile.setPunctuations(this.punctuationTextField.getText());
+            CharacterProfileController characterProfileController = new CharacterProfileController();
+            try {
+                characterProfileController.save(this.characterProfile, this.characterProfilesFolder);
+                setCharacterprofileBoxItems();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -203,13 +223,7 @@ public class JPassGenPanelController {
         /**
          * Character Profiles
          */
-        Map<String, CharacterProfile> characterprofiles;
-        try {
-            characterprofiles = new CharacterProfileController().getCharacterProfiles(this.characterProfilesFolder);
-            this.characterprofileBox.getItems().addAll(characterprofiles.values());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setCharacterprofileBoxItems();
         this.characterprofileBox.valueProperty().addListener(new ChangeListener<CharacterProfile>() {
             @Override
             public void changed(ObservableValue<? extends CharacterProfile> observable, CharacterProfile oldValue, CharacterProfile newValue) {
@@ -257,6 +271,18 @@ public class JPassGenPanelController {
                 }
             }
         });
+    }
+
+    private void setCharacterprofileBoxItems() {
+        this.characterprofileBox.getSelectionModel().clearSelection();
+        this.characterprofileBox.getItems().clear();
+        Map<String, CharacterProfile> characterprofiles;
+        try {
+            characterprofiles = new CharacterProfileController().getCharacterProfiles(this.characterProfilesFolder);
+            this.characterprofileBox.getItems().addAll(characterprofiles.values());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setCharacterFields() {

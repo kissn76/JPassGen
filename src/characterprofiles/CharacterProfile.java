@@ -1,12 +1,39 @@
 package characterprofiles;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+
 public class CharacterProfile {
 
+    private String filename;
     private String name;
     private String lowers;
     private String uppers;
     private String digits;
     private String punctuations;
+
+    public String getFilename() {
+        return this.filename;
+    }
+
+    public void setFilename() {
+        try {
+            String tmp = new Random().nextInt(Integer.MAX_VALUE) + "" + System.currentTimeMillis();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+            digest.update(tmp.getBytes("utf8"));
+            this.filename = String.format("%040x", new BigInteger(1, digest.digest()));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 
     public String getName() {
         return this.name;
