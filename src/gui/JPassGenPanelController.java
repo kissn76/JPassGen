@@ -1,11 +1,17 @@
 package gui;
 
+import java.io.IOException;
+import java.util.Map;
+
+import characterprofiles.CharacterProfile;
+import characterprofiles.CharacterProfileController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -18,12 +24,26 @@ public class JPassGenPanelController {
     private String password;
     private final char hiddenPwdChar = '●';
     private String passwordHider;
+    private CharacterProfile characterProfile = new CharacterProfile();
+    private String characterProfilesFolder = "CharacterProfiles/";
 
     @FXML
     private Spinner<Integer> lengthSpinner;
 
     @FXML
     private Slider lengthSlider;
+
+    @FXML
+    private ComboBox<CharacterProfile> characterprofileBox;
+
+    @FXML
+    private Button characterprofileDeleteBtn;
+
+    @FXML
+    private Button characterprofileSaveBtn;
+
+    @FXML
+    private Button characterprofileSaveAsNewBtn;
 
     @FXML
     private CheckBox lowerCheckBox;
@@ -75,6 +95,32 @@ public class JPassGenPanelController {
 
     @FXML
     private TextField passwordField;
+
+    @FXML
+    private void deleteCharacterProfile() {
+    }
+
+    @FXML
+    private void saveCharacterProfile() {
+        String name = this.characterprofileBox.getEditor().getText();
+        if (!name.isEmpty()) {
+            this.characterProfile.setName(name);
+            this.characterProfile.setLowers(this.lowerTextField.getText());
+            this.characterProfile.setUppers(this.upperTextField.getText());
+            this.characterProfile.setDigits(this.digitTextField.getText());
+            this.characterProfile.setPunctuations(this.punctuationTextField.getText());
+            CharacterProfileController characterProfileController = new CharacterProfileController();
+            try {
+                characterProfileController.save(this.characterProfile, this.characterProfilesFolder + name.toLowerCase().trim().replaceAll(" ", ""));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void saveAsNewCharacterProfile() {
+    }
 
     @FXML
     /*
@@ -154,33 +200,49 @@ public class JPassGenPanelController {
             }
         });
 
+        /**
+         * Character Profiles
+         */
+        Map<String, CharacterProfile> characterprofiles;
+        try {
+            characterprofiles = new CharacterProfileController().getCharacterProfiles(this.characterProfilesFolder);
+            this.characterprofileBox.getItems().addAll(characterprofiles.values());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.characterprofileBox.valueProperty().addListener(new ChangeListener<CharacterProfile>() {
+            @Override
+            public void changed(ObservableValue<? extends CharacterProfile> observable, CharacterProfile oldValue, CharacterProfile newValue) {
+                JPassGenPanelController.this.characterProfile = newValue;
+                setCharacterFields();
+            }
+        });
+
         /*
          * Lowercase
          */
         this.lowerCheckBox.setSelected(this.passwordGenerator.isEnabledLower());
         this.lowerSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxLength));
-        this.lowerTextField.setText(this.passwordGenerator.getLOWERALL());
 
         /*
          * Uppercase
          */
         this.upperCheckBox.setSelected(this.passwordGenerator.isEnabledUpper());
         this.upperSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxLength));
-        this.upperTextField.setText(this.passwordGenerator.getUPPERALL());
 
         /*
          * Digit
          */
         this.digitCheckBox.setSelected(this.passwordGenerator.isEnabledDigit());
         this.digitSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxLength));
-        this.digitTextField.setText(this.passwordGenerator.getDIGITSALL());
 
         /*
          * Punctuation
          */
         this.punctuationCheckBox.setSelected(this.passwordGenerator.isEnabledPunctuation());
         this.punctuationSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxLength));
-        this.punctuationTextField.setText(this.passwordGenerator.getPUNCTUATIONALL());
+
+        setCharacterFields();
 
         /*
          * Password
@@ -195,6 +257,13 @@ public class JPassGenPanelController {
                 }
             }
         });
+    }
+
+    private void setCharacterFields() {
+        this.lowerTextField.setText(this.characterProfile.getLowers());
+        this.upperTextField.setText(this.characterProfile.getUppers());
+        this.digitTextField.setText(this.characterProfile.getDigits());
+        this.punctuationTextField.setText(this.characterProfile.getPunctuations());
     }
 
     /*

@@ -2,32 +2,55 @@ package characterprofiles;
 
 public class CharacterProfile {
 
-    private final String LOWER;
-    private final String UPPER;
-    private final String DIGITS;
-    private final String PUNCTUATION;
+    private String name;
+    private String lowers;
+    private String uppers;
+    private String digits;
+    private String punctuations;
 
-    public CharacterProfile(String lower, String upper, String digits, String punctuation) {
-        LOWER = lower;
-        UPPER = upper;
-        DIGITS = digits;
-        PUNCTUATION = punctuation;
+    public String getName() {
+        return this.name;
     }
 
-    public String getLOWER() {
-        return LOWER;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUPPER() {
-        return UPPER;
+    public String getLowers() {
+        return this.lowers;
     }
 
-    public String getDIGITS() {
-        return DIGITS;
+    public void setLowers(String lowers) {
+        this.lowers = lowers;
     }
 
-    public String getPUNCTUATION() {
-        return PUNCTUATION;
+    public String getUppers() {
+        return this.uppers;
+    }
+
+    public void setUppers(String uppers) {
+        this.uppers = uppers;
+    }
+
+    public String getDigits() {
+        return this.digits;
+    }
+
+    public void setDigits(String digits) {
+        this.digits = digits;
+    }
+
+    public String getPunctuations() {
+        return this.punctuations;
+    }
+
+    public void setPunctuations(String punctuations) {
+        this.punctuations = punctuations;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
 }
