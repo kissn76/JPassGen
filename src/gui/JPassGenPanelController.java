@@ -3,7 +3,6 @@ package gui;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
 import characterprofiles.CharacterProfile;
 import characterprofiles.CharacterProfileController;
 import javafx.beans.value.ChangeListener;
@@ -22,6 +21,7 @@ import passwordgenerator.PasswordGenerator;
 import passwordgenerator.PasswordLengthException;
 
 public class JPassGenPanelController {
+
     private PasswordGenerator passwordGenerator = new PasswordGenerator();
     private String password;
     private final char hiddenPwdChar = '●';
@@ -119,8 +119,7 @@ public class JPassGenPanelController {
             CharacterProfileController characterProfileController = new CharacterProfileController();
             try {
                 characterProfileController.save(this.characterProfile);
-                this.characterprofileBox.getValue().setName(name);
-                this.characterprofileBox.getCellFactory().
+                this.characterprofileBox.getItems().set(characterprofileBox.getSelectionModel().getSelectedIndex(), characterProfile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,17 +128,18 @@ public class JPassGenPanelController {
 
     @FXML
     private void saveAsNewCharacterProfile() {
+        CharacterProfile cProfile = new CharacterProfile(characterProfile);
         String name = this.characterprofileBox.getEditor().getText();
         if (!name.isEmpty()) {
-            this.characterProfile.setName(name);
-            this.characterProfile.setLowers(this.lowerTextField.getText());
-            this.characterProfile.setUppers(this.upperTextField.getText());
-            this.characterProfile.setDigits(this.digitTextField.getText());
-            this.characterProfile.setPunctuations(this.punctuationTextField.getText());
+            cProfile.setName(name);
+            cProfile.setLowers(this.lowerTextField.getText());
+            cProfile.setUppers(this.upperTextField.getText());
+            cProfile.setDigits(this.digitTextField.getText());
+            cProfile.setPunctuations(this.punctuationTextField.getText());
             CharacterProfileController characterProfileController = new CharacterProfileController();
             try {
-                characterProfileController.saveAsNew(this.characterProfile, this.characterProfilesFolder);
-                this.characterprofileBox.getItems().add(this.characterProfile);
+                characterProfileController.saveAsNew(cProfile, this.characterProfilesFolder);
+                this.characterprofileBox.getItems().add(cProfile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -199,6 +199,7 @@ public class JPassGenPanelController {
          */
         this.lengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxLength, passLength));
         this.lengthSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 JPassGenPanelController.this.lengthSlider.setValue(newValue);
@@ -214,6 +215,7 @@ public class JPassGenPanelController {
         this.lengthSlider.setMinorTickCount(3);
         this.lengthSlider.setBlockIncrement(1);
         this.lengthSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (newValue.intValue() < 1) {
@@ -235,6 +237,7 @@ public class JPassGenPanelController {
             e.printStackTrace();
         }
         this.characterprofileBox.valueProperty().addListener(new ChangeListener<CharacterProfile>() {
+
             @Override
             public void changed(ObservableValue<? extends CharacterProfile> observable, CharacterProfile oldValue, CharacterProfile newValue) {
                 JPassGenPanelController.this.characterProfile = newValue;
@@ -272,6 +275,7 @@ public class JPassGenPanelController {
          * Password
          */
         this.unhidPwdField.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {

@@ -16,6 +16,17 @@ public class CharacterProfile {
     private String digits;
     private String punctuations;
 
+    public CharacterProfile() {
+    }
+
+    public CharacterProfile(CharacterProfile another) {
+        name = another.name;
+        lowers = another.lowers;
+        uppers = another.uppers;
+        digits = another.digits;
+        punctuations = another.punctuations;
+    }
+
     public File getFilePath() {
         return this.filePath;
     }
